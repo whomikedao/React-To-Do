@@ -26,6 +26,7 @@ class TodoItem extends Component {
 
 //STEP 21: now we bind to {this.props.markComplete}
 //STEP 24: Add a delete button and style
+//STEP 25: then Add onClick event
   render() {
     // const { id, title } = this.props.todo;
     //^ we can use this to just pull the id and title in the {} rather than {this.props.todo.title}
@@ -35,7 +36,7 @@ class TodoItem extends Component {
         <p>
             <input type="checkbox" onChange={this.props.markComplete.bind(this, this.props.todo.id)}/> {' '}
             {this.props.todo.title}
-            <button style={btnStyle}>X</button>
+            <button onClick={this.props.delTodo.bind(this, this.props.todo.id)} style={btnStyle}>X</button>
         </p>
       </div>
     )
