@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 //STEP 4: import Todos
 import Todos from './components/Todos';
+//STEP 29: import Header and on top of the Todos
+import Header from './layout/header';
+//STEP 30: Now to make an Add Todo input in components
+import AddTodo from './components/AddTodo';
+//STEP 38: import uuid
+import uuid from 'uuid';
 
 class App extends Component {
   //STEP 6: Add state. Some components typically use different components
@@ -10,20 +16,21 @@ class App extends Component {
     //So we created an object called "todos" 
     //then todos will have an array of objects
     //each object will have an id, title, and completed boolean
+  //STEP 39: replaced the hardcoded id with uuid
   state = {
     todos: [
       {
-        id: 1,
+        id: uuid.v4(),
         title: 'Take out the trash',
         completed: false
       },
       {
-        id: 2,
+        id: uuid.v4(),
         title: 'eat with the wife',
         completed: false
       },
       {
-        id: 3,
+        id: uuid.v4(),
         title: 'Meeting with boss',
         completed: false
       }
@@ -32,6 +39,8 @@ class App extends Component {
 //STEP 22: Now we have to change the completed 
   //so rather than settind todo.completed = true we need to have it toggle otherwise it'll just stay true
   //todo.completed = !todo.completed or basically the opposite of what it was
+//STEP 23: Add delete button in TodoItem
+//TOGGLE COMPLETE
   markComplete = (id) => {
     this.setState({ todos: this.state.todos.map(todo=>{
       if(todo.id === id){
@@ -39,6 +48,30 @@ class App extends Component {
       }
       return todo;
     }) })
+  }
+
+  //DELETE TODO
+  //STEP 26: adding the delete function
+    //basically copy everything that is already there and then use the spread operator "..."
+    //filter for each todo, return any todo that where the id is not equal that is passed in
+  //STEP 27: make a header for function markup
+  delTodo = (id) =>{
+    this.setState({todos: [...this.state.todos.filter(todo => todo.id !== id)]})
+  }
+
+  //ADD TODO
+  //STEP 37: now to add a function to add the value
+    //now to add it to our state
+    //the way to do that is by of course setState and the spread operator because we can't change it, we have to make a copy of it
+    //added a new constance 
+    //now for the ID we installed npm install uuid
+  addTodo = (title) =>{
+    const newTodo = {
+      id: uuid.v4(),
+      title: title,
+      completed: false
+    }
+    this.setState({ todos: [...this.state.todos, newTodo] })
   }
 
 //STEP 1: Create the initial App template
@@ -50,11 +83,16 @@ class App extends Component {
 //STEP 19: now added to the Todos div
 //STEP 20: Now we need an id to let the app knows which one is completed by going to to TodoItem
 
+//STEP 32: MADE ANOTHER DIV CONTAINER 
   render(){
     console.log(this.state.todos)
     return (
       <div className="App">
-        <Todos todos={this.state.todos} markComplete={this.markComplete}/>
+        <div className="container">
+          <Header />
+          <AddTodo addTodo={this.addTodo}/>
+          <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
+        </div>  
       </div>
     );
   }  
