@@ -18,16 +18,24 @@ import PropTypes from 'prop-types';
     //remember that todo is being passed as a prop/property
     //so go to STEP 11 in TodoItem
 //STEP 12: React wants you to add a unique key for these type of things so add key={todo.id}
+//STEP 18: Now we add the markComplete to Todos
+    //In the TodoItem when we check the box we call this.props.markComplete
+    //since we're using that prop and we have one in the Todo
+    //it'll run whatever onto here
+    //now we add to App.js
 class Todos extends Component {
+
+
     render() {
         return this.props.todos.map((todo)=>(
-                <TodoItem key={todo.id} todo={todo}/>
+            <TodoItem key={todo.id} todo={todo} markComplete={this.props.markComplete}/>
         ));
     }
 }
 
+//PROTOTYPES
 Todos.propTypes = {
-    todos: PropTypes.array.isRequired
+    todo: PropTypes.array.isRequired
 }
 
 export default Todos;

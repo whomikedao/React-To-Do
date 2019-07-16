@@ -25,9 +25,20 @@ class App extends Component {
       {
         id: 3,
         title: 'Meeting with boss',
-        completed: true
+        completed: false
       }
     ]
+  }
+//STEP 22: Now we have to change the completed 
+  //so rather than settind todo.completed = true we need to have it toggle otherwise it'll just stay true
+  //todo.completed = !todo.completed or basically the opposite of what it was
+  markComplete = (id) => {
+    this.setState({ todos: this.state.todos.map(todo=>{
+      if(todo.id === id){
+        todo.completed = !todo.completed
+      }
+      return todo;
+    }) })
   }
 
 //STEP 1: Create the initial App template
@@ -36,11 +47,14 @@ class App extends Component {
 //STEP 7: Now we want to add todos component from our main App state to our todos props
   //so we add todos={this.state.todos}
   //this takes the todo in our state and passes through our todos as a prop
+//STEP 19: now added to the Todos div
+//STEP 20: Now we need an id to let the app knows which one is completed by going to to TodoItem
+
   render(){
     console.log(this.state.todos)
     return (
       <div className="App">
-        <Todos todos={this.state.todos}/>
+        <Todos todos={this.state.todos} markComplete={this.markComplete}/>
       </div>
     );
   }  
