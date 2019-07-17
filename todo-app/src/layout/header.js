@@ -1,5 +1,5 @@
 import React from 'react';
-
+//STEP 28: CREATE HEADER
 function Header() {
     return (
         <header style={headerStyle}>

@@ -8,6 +8,7 @@ import Header from './layout/header';
 import AddTodo from './components/AddTodo';
 //STEP 38: import uuid
 import uuid from 'uuid';
+//STEP 40: Now we start with React Router and install it
 
 class App extends Component {
   //STEP 6: Add state. Some components typically use different components

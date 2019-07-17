@@ -27,6 +27,7 @@ class TodoItem extends Component {
 //STEP 21: now we bind to {this.props.markComplete}
 //STEP 24: Add a delete button and style
 //STEP 25: then Add onClick event
+    //THEN add to todos.js and app.js
   render() {
     // const { id, title } = this.props.todo;
     //^ we can use this to just pull the id and title in the {} rather than {this.props.todo.title}

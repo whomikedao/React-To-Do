@@ -23,6 +23,7 @@ class AddTodo extends Component {
     //add e.preventDefault
     //then add a props method becuse we'd have to pass the title up 
     //then do a setState to change the title back to nothing basically to clear the field 
+    //now we go to App.js and add it to the rendering AddTodo and make a function
     onSubmit = (e) => {
         e.preventDefault();
         this.props.addTodo(this.state.title);
