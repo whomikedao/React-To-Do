@@ -45,7 +45,7 @@ class TodoItem extends Component {
 }
 
 const btnStyle = {
-    background: '#FF0000',
+    background: '#ff6961',
     color: '#fff',
     border: 'none',
     padding: '5px 8px',

@@ -9,6 +9,12 @@ import AddTodo from './components/AddTodo';
 //STEP 38: import uuid
 import uuid from 'uuid';
 //STEP 40: Now we start with React Router and install it
+  //$npm install react-router-dom
+//STEP 43: Import Browser Router and router
+  //we also have to wrap the whole app inside router where render is
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+//STEP 45: import About
+import About from './pages/About';
 
 class App extends Component {
   //STEP 6: Add state. Some components typically use different components
@@ -85,16 +91,33 @@ class App extends Component {
 //STEP 20: Now we need an id to let the app knows which one is completed by going to to TodoItem
 
 //STEP 32: MADE ANOTHER DIV CONTAINER 
+//STEP 44: Wrap the whole thing insdie Render
+  //So now the thing is that we want the todo list as our homepage but we have two components that make up that page
+  //doing one component is easy but for two you have to use render props
+  //so to do the route we'll add the path, then render and return the AddTodo and Todos insides the React Fragment
+//STEP 46: Add a route to the About page
+  //one problem you'll run into is that if both path places "/" and "/about" uses the same slash
+  //then make the home page the exact path
+//STEP 47: Now we need to add links for the user to go to the about me page and back to the home page
+  //we'll add that to the header page since that's where it would be
+  //for other projects this could be the navigation page
   render(){
     console.log(this.state.todos)
     return (
-      <div className="App">
-        <div className="container">
-          <Header />
-          <AddTodo addTodo={this.addTodo}/>
-          <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
-        </div>  
-      </div>
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <Route exact path="/" render={props => (
+              <React.Fragment>
+                <AddTodo addTodo={this.addTodo}/>
+                <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo}/>
+              </React.Fragment>
+            )} />
+            <Route path="/about" component={About}/>
+          </div>  
+        </div>
+      </Router>
     );
   }  
 }
